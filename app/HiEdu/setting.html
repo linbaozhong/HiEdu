@@ -69,13 +69,19 @@
 			//触发主页面的gohome事件
 			mui.fire(main, 'gohome');
 		});
-		
-//		document.addEventListener('swiperight', function() {
-//			//获得主页面的webview
-//			var main = plus.webview.currentWebview().parent();
-//			//触发主页面的gohome事件
-//			mui.fire(main, 'swiperight');
-//		});
+		document.addEventListener('swipeleft', function() {
+			//plus.webview.getLaunchWebview().evalJS('swipeleft();');
+			//获得主页面的webview
+			var main = plus.webview.currentWebview().parent();
+			//触发主页面的gohome事件
+			mui.fire(main, 'swipeleft');
+		});
+		document.addEventListener('swiperight', function() {
+			//获得主页面的webview
+			var main = plus.webview.currentWebview().parent();
+			//触发主页面的gohome事件
+			mui.fire(main, 'swiperight');
+		});
 	</script>
 
 </html>
