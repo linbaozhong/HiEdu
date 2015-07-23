@@ -9,6 +9,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/app.css"/>
 		<style>
 			html,
 			body {
@@ -19,7 +20,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+			<a class="mui-icon mui-icon-bars mui-pull-left" style="font-weight: bold;"></a>
 			<h1 id="title" class="mui-title">HiEdu</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab">
@@ -35,12 +36,18 @@
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">通讯录</span>
 			</a>
-			<a class="mui-tab-item" href="setting.html">
+			<!--<a class="mui-tab-item" href="setting.html">
 				<span class="mui-icon mui-icon-gear"></span>
 				<span class="mui-tab-label">设置</span>
-			</a>
+			</a>-->
 		</nav>
-		<script src="js/mui.min.js"></script>
+		<div class="mask" style="display: none;">
+			
+		</div>
+	</body>
+
+</html>
+<script src="js/mui.min.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			var menu = null,
 				main = null,
@@ -59,6 +66,7 @@
 				plus.screen.lockOrientation("portrait-primary");
 				main = plus.webview.currentWebview();
 				main.addEventListener('maskClick', closeMenu);
+				
 				for (var i = 0; i < 4; i++) {
 					var temp = {};
 					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
@@ -102,7 +110,17 @@
 					});
 					//menu设置透明遮罩防止点击
 					menu.show('none', 0, function() {
-						//主窗体开始侧滑并显示遮罩
+//						//子窗体显示遮罩
+//						var list = main.children();
+//						for (var i = 0; i < list.length; i++) {
+//							if(list[i].isVisible()){
+//								list[i].evalJS('document.querySelector(".mask").style.display = "block";');
+//								break;
+//							}
+//						};
+//						//主窗体显示遮罩
+//						document.querySelector('.mask').style.display = 'block';
+						//主窗体开始侧滑
 						main.setStyle({
 							mask: 'rgba(0,0,0,0.4)',
 							left: '70%',
@@ -128,7 +146,16 @@
 					return;
 				}
 				if (showMenu) {
-					//关闭遮罩；
+//					//子窗体关闭遮罩
+//					var list = main.children();
+//					for (var i = 0; i < list.length; i++) {
+//						if(list[i].isVisible()){
+//							list[i].evalJS('document.querySelector(".mask").style.display = "none";');
+//							break;
+//						}
+//					};
+//					//主窗体关闭遮罩；
+//					document.querySelector('.mask').style.display = 'none';
 					//主窗体开始侧滑；
 					isInTransition = true;
 					main.setStyle({
@@ -146,6 +173,8 @@
 					}, 300);
 				}
 			};
+			//
+			mui('.mui-bar-nav').on('tap','a.mui-icon-bars',openMenu);
 			 //主界面向右滑动，若菜单未显示，则显示菜单；否则不做任何操作
 			window.addEventListener("swiperight", openMenu);
 			 //主界面向左滑动，若菜单已显示，则关闭菜单；否则，不做任何操作；
@@ -248,6 +277,3 @@
 				}
 			};
 		</script>
-	</body>
-
-</html>

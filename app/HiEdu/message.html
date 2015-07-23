@@ -9,6 +9,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/app.css"/>
 		<style>
 			html,
 			body {
@@ -80,6 +81,10 @@
 				</ul>
 			</div>
 		</div>
+		<div class="mask" style="display: none;">
+
+		</div>
+
 	</body>
 	<script src="js/mui.min.js"></script>
 	<script>
@@ -90,13 +95,15 @@
 		function openMenu() {
 			!index && (index = mui.currentWebview.parent());
 			mui.fire(index, "menu:open");
-		}
+			//document.querySelector('.mask').style.display = 'block';
+		};
 
 		function closeMenu() {
-				!index && (index = mui.currentWebview.parent());
-				mui.fire(index, "menu:close");
-			}
-			//在android4.4.2中的swipe事件，需要preventDefault一下，否则触发不正常
+			!index && (index = mui.currentWebview.parent());
+			mui.fire(index, "menu:close");
+			//document.querySelector('.mask').style.display = 'none';
+		};
+		 //在android4.4.2中的swipe事件，需要preventDefault一下，否则触发不正常
 		window.addEventListener('dragstart', function(e) {
 			mui.gestures.touch.lockDirection = true; //锁定方向
 			mui.gestures.touch.startDirection = e.detail.direction;
